@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Blaise Cz | Java, Python & Go Developer | Healthcare + AI Engineering
+    </title>
+    <meta
+      name="description"
+      content="Portfolio of Blaise Cz — Java and Python developer learning Go, with healthcare software delivery experience, AI model training, and agentic pipeline engineering."
+    />
+    <link rel="canonical" href="https://blaisecz.github.io/portfolio/" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Blaise Cz | Java, Python & Go Developer"
+    />
+    <meta
+      property="og:description"
+      content="Modern portfolio featuring healthcare-focused backend engineering, AI model training, and agentic systems work."
+    />
+    <meta property="og:url" content="https://blaisecz.github.io/portfolio/" />
+    <meta
+      property="og:image"
+      content="https://blaisecz.github.io/portfolio/favicon.svg"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Blaise Cz | Java, Python & Go Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Healthcare-aware backend engineer building with Java, Python, Go, and AI pipelines."
+    />
+    <meta
+      name="twitter:image"
+      content="https://blaisecz.github.io/portfolio/favicon.svg"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header" id="top">
+      <nav class="nav container" aria-label="Primary navigation">
+        <a class="brand" href="#top">BC<span>Portfolio</span></a>
+        <button
+          class="nav-toggle"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="primary-nav-links"
+        >
+          ☰
+        </button>
+        <ul class="nav-links" id="primary-nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero container">
+        <p class="kicker">Java · Python · Go</p>
+        <h1>Modern Software Engineer with Healthcare Domain Expertise</h1>
+        <p class="lead">
+          I build reliable products for healthcare and data-heavy environments,
+          from backend platforms in Java/Python to emerging services in Go. I
+          also design and train AI models and craft agentic pipelines that solve
+          real-world problems.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-secondary" href="#contact">Let's Connect</a>
+        </div>
+      </section>
+
+      <section class="section container" id="about">
+        <h2>About Me</h2>
+        <p>
+          I'm a developer focused on delivering production-ready software with
+          clean architecture and measurable impact. With healthcare experience,
+          I understand regulatory-aware design, reliability, and the importance
+          of user trust. I enjoy combining classic engineering with AI
+          capabilities to create systems that are both intelligent and
+          maintainable.
+        </p>
+      </section>
+
+      <section class="section container" id="skills">
+        <h2>Core Skills</h2>
+        <div class="grid skills-grid">
+          <article class="card">
+            <h3>Backend Engineering</h3>
+            <p>
+              Java (Spring), Python APIs, scalable microservices, secure
+              integration patterns.
+            </p>
+          </article>
+          <article class="card">
+            <h3>AI & Agentic Systems</h3>
+            <p>
+              Model training workflows, prompt orchestration, evaluation loops,
+              autonomous pipelines.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Go (Learning Path)</h3>
+            <p>
+              Building lightweight services and concurrency-focused tooling with
+              idiomatic Go practices.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Healthcare Products</h3>
+            <p>
+              Domain-aware design with a focus on data quality,
+              interoperability, and dependable delivery.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section container" id="projects">
+        <div class="section-title-row">
+          <h2>Featured Projects</h2>
+          <p class="muted">Filter by skill tags and search by keyword.</p>
+        </div>
+
+        <div class="project-controls" aria-label="Project filters">
+          <div class="filter-tags" id="tag-filters"></div>
+          <label class="search-label" for="project-search"
+            >Search projects</label
+          >
+          <input
+            id="project-search"
+            class="project-search"
+            type="search"
+            placeholder="Search by title, tag, or highlight"
+          />
+        </div>
+
+        <div
+          class="grid project-grid"
+          id="project-grid"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <section class="section container" id="contact">
+        <h2>Contact</h2>
+        <p>
+          Open to backend, platform, and AI engineering opportunities. Email:
+          <a id="email-link" href="mailto:blaise.cz.dev@gmail.com"
+            >blaise.cz.dev@gmail.com</a
+          >
+          <button id="copy-email" class="copy-btn" type="button">
+            Copy email
+          </button>
+          <span
+            id="copy-status"
+            class="status-inline"
+            aria-live="polite"
+          ></span>
+        </p>
+
+        <form
+          id="contact-form"
+          class="contact-form"
+          action="https://formspree.io/f/xeokyqgd"
+          method="POST"
+        >
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required />
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+
+          <div class="hidden-field" aria-hidden="true">
+            <label for="website">Website</label>
+            <input
+              id="website"
+              type="text"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <button id="contact-submit" class="btn btn-primary" type="submit">
+            Send message
+          </button>
+          <p id="form-status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>
+          © <span id="year"></span> Blaise Cz. Crafted with precision and
+          curiosity.
+        </p>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
