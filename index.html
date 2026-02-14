@@ -110,71 +110,145 @@
         </section>
 
         <section id="experience" class="section">
-          <h2>Career Timeline</h2>
-          <p class="muted timeline-hint">Swipe left ↔ right to browse my journey.</p>
-          <div class="timeline" aria-label="Swipeable career timeline">
-            <article class="timeline-item card">
-              <p class="timeline-period">06.2018 — 03.2019</p>
-              <h3>Data Analyst · Optimal Energy</h3>
-              <ul>
-                <li>Built automated reporting pipelines, reducing manual extraction effort by over 75%.</li>
-                <li>Developed data validation routines for large-scale energy pricing data.</li>
-              </ul>
-            </article>
+          <h2>Expandable Timeline</h2>
+          <p class="muted timeline-hint">From my birth to education and work milestones.</p>
+          <div class="timeline" aria-label="Expandable life and career timeline">
+            <details class="timeline-item timeline-life card" open>
+              <summary>
+                <span class="timeline-period">08.10.1998</span>
+                <span class="timeline-title">Birth · Poznań, Poland</span>
+              </summary>
+              <div class="timeline-content">
+                <p>The journey starts here.</p>
+              </div>
+            </details>
 
-            <article class="timeline-item card">
-              <p class="timeline-period">06.2019 — 03.2022</p>
-              <h3>Junior Full-Stack Developer · Poznan Supercomputing and Networking Center</h3>
-              <ul>
-                <li>Maintained and developed municipal platforms, including poznan.pl.</li>
-                <li>Delivered Java/Spring backend features with FreeMarker and HTML/CSS frontends.</li>
-              </ul>
-            </article>
+            <details class="timeline-item timeline-education card">
+              <summary>
+                <span class="timeline-period">10.2017 — 02.2021</span>
+                <span class="timeline-title">BSc in Engineering · Poznan University of Technology</span>
+              </summary>
+              <div class="timeline-content">
+                <ul>
+                  <li>Specialization: Security of IT Systems.</li>
+                </ul>
+              </div>
+            </details>
 
-            <article class="timeline-item card">
-              <p class="timeline-period">01.2021 — 03.2022</p>
-              <h3>AI Researcher · Poznan Supercomputing and Networking Center</h3>
-              <ul>
-                <li>Worked on PET-CT oncology diagnostics with doctors and medical professionals.</li>
-                <li>Preprocessed medical imaging datasets and trained early AI models.</li>
-              </ul>
-            </article>
+            <details class="timeline-item timeline-work card">
+              <summary>
+                <span class="timeline-period">06.2018 — 03.2019</span>
+                <span class="timeline-title">Data Analyst · Optimal Energy</span>
+              </summary>
+              <div class="timeline-content">
+                <ul>
+                  <li>Built automated reporting pipelines and reduced manual extraction work by over 75%.</li>
+                  <li>Developed data validation routines for large-scale energy pricing data.</li>
+                </ul>
+              </div>
+            </details>
 
-            <article class="timeline-item card">
-              <p class="timeline-period">03.2022 — 08.2022</p>
-              <h3>Full-Stack Developer · Poznan Supercomputing and Networking Center</h3>
-              <ul>
-                <li>Built internal portals with Java (Spring) and React for government institutions.</li>
-                <li>Collaborated across frontend/backend teams to align UI and service APIs.</li>
-              </ul>
-            </article>
+            <details class="timeline-item timeline-work card">
+              <summary>
+                <span class="timeline-period">06.2019 — 03.2022</span>
+                <span class="timeline-title">Junior Full-Stack Developer · PSNC</span>
+              </summary>
+              <div class="timeline-content">
+                <ul>
+                  <li>Maintained and developed municipal platforms, including poznan.pl.</li>
+                  <li>Delivered Java/Spring backend features with FreeMarker and HTML/CSS frontends.</li>
+                </ul>
+              </div>
+            </details>
 
-            <article class="timeline-item card">
-              <p class="timeline-period">09.2022 — 02.2024</p>
-              <h3>Software Engineer · Sii Poland (for CompuGroupMedical)</h3>
-              <ul>
-                <li>Modernized legacy systems: Java 8 → 17 and Spring Boot 2.x → 3.x.</li>
-                <li>Built REST APIs and batch services for large public-sector platforms.</li>
-              </ul>
-            </article>
+            <details class="timeline-item timeline-work card">
+              <summary>
+                <span class="timeline-period">01.2021 — 03.2022</span>
+                <span class="timeline-title">AI Researcher · PSNC</span>
+              </summary>
+              <div class="timeline-content">
+                <ul>
+                  <li>Worked on PET-CT oncology diagnostics with medical professionals.</li>
+                  <li>Preprocessed medical imaging datasets and trained early AI models.</li>
+                </ul>
+              </div>
+            </details>
 
-            <article class="timeline-item card">
-              <p class="timeline-period">02.2024 — current</p>
-              <h3>Software Engineer · CompuGroupMedical</h3>
-              <ul>
-                <li>Designed and shipped production LLM, ASR, and Computer Vision features.</li>
-                <li>Trained lightweight neural networks for edge/client-side usage.</li>
-              </ul>
-            </article>
+            <details class="timeline-item timeline-education card">
+              <summary>
+                <span class="timeline-period">03.2021 — 07.2022</span>
+                <span class="timeline-title">MSc in Engineering (AI) · Poznan University of Technology</span>
+              </summary>
+              <div class="timeline-content">
+                <ul>
+                  <li>Specialization: Artificial Intelligence.</li>
+                </ul>
+              </div>
+            </details>
 
-            <article class="timeline-item card">
-              <p class="timeline-period">10.2025 — current</p>
-              <h3>Lecturer / Academic Teacher · Collegium Da Vinci</h3>
-              <ul>
-                <li>Teaching AI and Data Science through practical, hands-on classes.</li>
-                <li>Mentoring students in Python, Jupyter, and modern ML tooling.</li>
-              </ul>
-            </article>
+            <details class="timeline-item timeline-work card">
+              <summary>
+                <span class="timeline-period">03.2022 — 08.2022</span>
+                <span class="timeline-title">Full-Stack Developer · PSNC</span>
+              </summary>
+              <div class="timeline-content">
+                <ul>
+                  <li>Built internal portals with Java (Spring) and React for public institutions.</li>
+                  <li>Aligned UI and backend API collaboration across teams.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="timeline-item timeline-work card">
+              <summary>
+                <span class="timeline-period">09.2022 — 02.2024</span>
+                <span class="timeline-title">Software Engineer · Sii Poland (for CompuGroupMedical)</span>
+              </summary>
+              <div class="timeline-content">
+                <ul>
+                  <li>Modernized Java 8 → 17 and Spring Boot 2.x → 3.x systems.</li>
+                  <li>Built REST APIs and batch services for large public-sector platforms.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="timeline-item timeline-education card">
+              <summary>
+                <span class="timeline-period">10.2024 — 07.2025</span>
+                <span class="timeline-title">Project Management · Collegium Da Vinci</span>
+              </summary>
+              <div class="timeline-content">
+                <ul>
+                  <li>Postgraduate specialization in project management.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="timeline-item timeline-work card" open>
+              <summary>
+                <span class="timeline-period">02.2024 — current</span>
+                <span class="timeline-title">Software Engineer · CompuGroupMedical</span>
+              </summary>
+              <div class="timeline-content">
+                <ul>
+                  <li>Designed and shipped production LLM, ASR, and Computer Vision features.</li>
+                  <li>Trained lightweight neural networks for edge/client-side deployment.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="timeline-item timeline-work card">
+              <summary>
+                <span class="timeline-period">10.2025 — current</span>
+                <span class="timeline-title">Lecturer / Academic Teacher · Collegium Da Vinci</span>
+              </summary>
+              <div class="timeline-content">
+                <ul>
+                  <li>Teaching AI and Data Science through practical, hands-on classes.</li>
+                  <li>Mentoring students in Python, Jupyter, and modern ML tooling.</li>
+                </ul>
+              </div>
+            </details>
           </div>
         </section>
 
