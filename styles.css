@@ -220,13 +220,58 @@ body {
   padding: 1rem;
 }
 
+.timeline-hint {
+  margin-bottom: 0.8rem;
+}
+
 .timeline {
   display: grid;
-  gap: 0.8rem;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 1fr);
+  gap: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.4rem 0.15rem 0.8rem;
+}
+
+.timeline::after {
+  content: "";
+  min-width: 0.15rem;
+}
+
+.timeline-item {
+  position: relative;
+  scroll-snap-align: start;
+  min-height: 230px;
+  border: 1px solid rgba(69, 214, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(6, 10, 26, 0.4);
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+}
+
+.timeline-period {
+  margin: 0 0 0.35rem;
+  color: var(--accent-2);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .timeline-item h3 {
-  margin-top: 0;
+  margin: 0 0 0.45rem;
+  line-height: 1.4;
+  font-size: 1.05rem;
 }
 
 .timeline-item ul {
@@ -337,6 +382,48 @@ body {
   text-decoration: none;
 }
 
+
+.contact-intro {
+  margin-bottom: 1rem;
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+
+.contact-card {
+  border: 1px solid rgba(69, 214, 255, 0.4);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  display: grid;
+  gap: 0.2rem;
+  text-decoration: none;
+  background: linear-gradient(180deg, rgba(69, 214, 255, 0.12), rgba(127, 140, 255, 0.08));
+}
+
+.contact-card strong {
+  color: #f8fbff;
+  word-break: break-word;
+}
+
+.contact-label {
+  color: var(--accent-2);
+  font-size: 0.8rem;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.contact-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
 .copy-btn {
   margin-left: 0.6rem;
   border: 1px solid var(--border);
@@ -401,11 +488,32 @@ body {
   .profile-panel {
     position: static;
   }
+
+  .timeline {
+    grid-auto-columns: minmax(265px, 85vw);
+  }
 }
 
 @media (max-width: 760px) {
   .nav-toggle {
     display: inline-flex;
+  }
+
+  .timeline {
+    grid-auto-columns: 86vw;
+    padding-bottom: 1rem;
+  }
+
+  .contact-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-actions {
+    flex-wrap: wrap;
+  }
+
+  .copy-btn {
+    margin-left: 0;
   }
 
   .nav-links {

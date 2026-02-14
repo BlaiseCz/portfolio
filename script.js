@@ -183,7 +183,10 @@ if (contactForm && contactSubmit && formStatus) {
 
 if (copyEmailButton && copyStatus && emailLink) {
   copyEmailButton.addEventListener("click", async () => {
-    const email = emailLink.textContent.trim();
+    const emailHref = emailLink.getAttribute("href") || "";
+    const email = emailHref.startsWith("mailto:")
+      ? emailHref.replace("mailto:", "")
+      : emailLink.textContent.trim();
     await navigator.clipboard.writeText(email);
     copyStatus.textContent = "Copied";
 
