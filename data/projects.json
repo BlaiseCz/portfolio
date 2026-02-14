@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Clinical Data Exchange Platform",
+    "tags": ["Java", "Spring", "Healthcare"],
+    "highlights": [
+      "Designed HL7/FHIR ingestion services for multi-clinic interoperability.",
+      "Reduced failed record processing by introducing schema validation and replay queues.",
+      "Added observability dashboards for throughput, error rates, and message latency."
+    ],
+    "links": {
+      "repo": "https://github.com/blaisecz",
+      "demo": "https://blaisecz.github.io/portfolio/"
+    }
+  },
+  {
+    "title": "Model Training & Evaluation Toolkit",
+    "tags": ["Python", "MLOps", "AI"],
+    "highlights": [
+      "Built reproducible training workflows with experiment metadata tracking.",
+      "Automated model comparison reports to speed up iteration decisions.",
+      "Packaged evaluation scripts into reusable CLI commands for team use."
+    ],
+    "links": {
+      "repo": "https://github.com/blaisecz"
+    }
+  },
+  {
+    "title": "Agentic Workflow Automator",
+    "tags": ["Python", "Agents", "LLM"],
+    "highlights": [
+      "Implemented multi-step agent orchestration with guardrails and fallbacks.",
+      "Introduced human-in-the-loop checkpoints for sensitive decision stages.",
+      "Improved completion accuracy with retrieval and structured output validation."
+    ],
+    "links": {
+      "repo": "https://github.com/blaisecz"
+    }
+  },
+  {
+    "title": "Realtime Event Processor",
+    "tags": ["Go", "Concurrency", "Services"],
+    "highlights": [
+      "Built a goroutine/channel pipeline to process high-volume event streams.",
+      "Added backpressure handling to keep memory usage stable during spikes.",
+      "Measured end-to-end latency and tuned worker pool behavior."
+    ],
+    "links": {
+      "repo": "https://github.com/blaisecz"
+    }
+  }
+]
