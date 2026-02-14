@@ -10,8 +10,45 @@ const formStatus = document.getElementById("form-status");
 const copyEmailButton = document.getElementById("copy-email");
 const copyStatus = document.getElementById("copy-status");
 const emailLink = document.getElementById("email-link");
+const themeToggle = document.getElementById("theme-toggle");
+const timelineItems = document.querySelectorAll(".timeline .timeline-item");
+const skillMeters = document.querySelectorAll(".skill-meter");
 
 let projects = [];
+
+function getPreferredTheme() {
+  const saved = localStorage.getItem("theme");
+  if (saved === "light" || saved === "dark") {
+    return saved;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  if (themeToggle) {
+    themeToggle.textContent = theme === "dark" ? "🌙" : "☀️";
+    themeToggle.setAttribute(
+      "aria-label",
+      theme === "dark" ? "Switch to light theme" : "Switch to dark theme",
+    );
+  }
+}
+
+applyTheme(getPreferredTheme());
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "light";
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem("theme", next);
+  });
+}
+
 let activeTag = "All";
 let searchTerm = "";
 
@@ -181,9 +218,46 @@ if (contactForm && contactSubmit && formStatus) {
   });
 }
 
+if (timelineItems.length > 0) {
+  timelineItems.forEach((item) => {
+    item.addEventListener("toggle", () => {
+      if (!item.open) {
+        return;
+      }
+
+      timelineItems.forEach((other) => {
+        if (other !== item) {
+          other.open = false;
+        }
+      });
+    });
+  });
+}
+
+if (skillMeters.length > 0) {
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        obs.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.35 },
+  );
+
+  skillMeters.forEach((meter) => observer.observe(meter));
+}
+
 if (copyEmailButton && copyStatus && emailLink) {
   copyEmailButton.addEventListener("click", async () => {
-    const email = emailLink.textContent.trim();
+    const emailHref = emailLink.getAttribute("href") || "";
+    const email = emailHref.startsWith("mailto:")
+      ? emailHref.replace("mailto:", "")
+      : emailLink.textContent.trim();
     await navigator.clipboard.writeText(email);
     copyStatus.textContent = "Copied";
 
