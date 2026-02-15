@@ -11,8 +11,15 @@ const copyEmailButton = document.getElementById("copy-email");
 const copyStatus = document.getElementById("copy-status");
 const emailLink = document.getElementById("email-link");
 const themeToggle = document.getElementById("theme-toggle");
-const timelineItems = document.querySelectorAll(".timeline .timeline-item");
 const skillMeters = document.querySelectorAll(".skill-meter");
+const timelineButtons = document.querySelectorAll(".timeline-segment-btn[data-period]");
+const timelineBoard = document.getElementById("timeline-board");
+const timelineDetailType = document.getElementById("timeline-detail-type");
+const timelineDetailTitle = document.getElementById("timeline-detail-title");
+const timelineDetailPeriod = document.getElementById("timeline-detail-period");
+const timelineDetailDescription = document.getElementById("timeline-detail-description");
+const timelineDetailCard = document.querySelector(".timeline-detail");
+const timelineCursor = document.getElementById("timeline-cursor");
 
 let projects = [];
 
@@ -218,20 +225,82 @@ if (contactForm && contactSubmit && formStatus) {
   });
 }
 
-if (timelineItems.length > 0) {
-  timelineItems.forEach((item) => {
-    item.addEventListener("toggle", () => {
-      if (!item.open) {
+if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && timelineDetailPeriod && timelineDetailDescription) {
+  const timelineButtonList = [...timelineButtons];
+  let pinnedButton = timelineButtonList[0];
+
+  const midpointPercent = (button) => {
+    const segment = button.closest(".timeline-segment");
+    if (!segment) {
+      return 22;
+    }
+
+    const style = segment.getAttribute("style") || "";
+    const startMatch = style.match(/--start:\s*([\d.]+)%/);
+    const endMatch = style.match(/--end:\s*([\d.]+)%/);
+    if (!startMatch || !endMatch) {
+      return 22;
+    }
+
+    const start = Number(startMatch[1]);
+    const end = Number(endMatch[1]);
+    return start + (end - start) / 2;
+  };
+
+  const setDetail = (button) => {
+    timelineButtonList.forEach((item) => item.classList.remove("is-active"));
+    button.classList.add("is-active");
+
+    timelineDetailType.textContent = button.dataset.type || "Timeline";
+    timelineDetailTitle.textContent = button.dataset.title || "";
+    timelineDetailPeriod.textContent = button.dataset.period || "";
+    timelineDetailDescription.textContent = button.dataset.description || "";
+
+    const markerPosition = `${midpointPercent(button)}%`;
+    if (timelineBoard) {
+      timelineBoard.style.setProperty("--cursor-left", markerPosition);
+    }
+    if (timelineCursor) {
+      timelineCursor.style.left = markerPosition;
+    }
+
+    if (timelineDetailCard) {
+      timelineDetailCard.classList.remove("is-updated");
+      window.requestAnimationFrame(() => timelineDetailCard.classList.add("is-updated"));
+    }
+  };
+
+  setDetail(pinnedButton);
+
+  timelineButtonList.forEach((button, index) => {
+    button.addEventListener("mouseenter", () => setDetail(button));
+    button.addEventListener("focus", () => setDetail(button));
+    button.addEventListener("click", () => {
+      pinnedButton = button;
+      setDetail(button);
+    });
+
+    button.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
         return;
       }
 
-      timelineItems.forEach((other) => {
-        if (other !== item) {
-          other.open = false;
-        }
-      });
+      event.preventDefault();
+      const nextIndex = event.key === "ArrowRight"
+        ? Math.min(index + 1, timelineButtonList.length - 1)
+        : Math.max(index - 1, 0);
+      const nextButton = timelineButtonList[nextIndex];
+      pinnedButton = nextButton;
+      nextButton.focus();
+      setDetail(nextButton);
     });
   });
+
+  if (timelineBoard) {
+    timelineBoard.addEventListener("mouseleave", () => {
+      setDetail(pinnedButton);
+    });
+  }
 }
 
 if (skillMeters.length > 0) {
