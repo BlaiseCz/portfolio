@@ -18,6 +18,7 @@ const timelineDetailTitle = document.getElementById("timeline-detail-title");
 const timelineDetailPeriod = document.getElementById("timeline-detail-period");
 const timelineDetailDescription = document.getElementById("timeline-detail-description");
 const timelineDetailCard = document.querySelector(".timeline-detail");
+const timelineDetailHost = document.getElementById("timeline-detail-host");
 const timelineFilterButtons = document.querySelectorAll(".timeline-filter-btn[data-filter]");
 
 let projects = [];
@@ -229,6 +230,24 @@ if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && t
   const timelineItems = [...document.querySelectorAll(".timeline-item[data-type]")];
   let pinnedButton = timelineButtonList[0];
 
+  const mobileTimelineQuery = window.matchMedia("(max-width: 760px)");
+
+  const placeDetailCard = (button) => {
+    if (!timelineDetailCard || !timelineDetailHost) {
+      return;
+    }
+
+    if (mobileTimelineQuery.matches) {
+      const activeItem = button.closest(".timeline-item");
+      if (activeItem) {
+        activeItem.appendChild(timelineDetailCard);
+      }
+      return;
+    }
+
+    timelineDetailHost.appendChild(timelineDetailCard);
+  };
+
   const setDetail = (button) => {
     timelineButtonList.forEach((item) => item.classList.remove("is-active"));
     button.classList.add("is-active");
@@ -237,6 +256,8 @@ if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && t
     timelineDetailTitle.textContent = button.dataset.title || "";
     timelineDetailPeriod.textContent = button.dataset.period || "";
     timelineDetailDescription.textContent = button.dataset.description || "";
+
+    placeDetailCard(button);
 
     if (timelineDetailCard) {
       timelineDetailCard.classList.remove("is-updated");
@@ -316,6 +337,20 @@ if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && t
       applyFilter(filter);
     });
   });
+
+
+  const handleTimelineBreakpointChange = () => {
+    if (!pinnedButton) {
+      return;
+    }
+    placeDetailCard(pinnedButton);
+  };
+
+  if (typeof mobileTimelineQuery.addEventListener === "function") {
+    mobileTimelineQuery.addEventListener("change", handleTimelineBreakpointChange);
+  } else if (typeof mobileTimelineQuery.addListener === "function") {
+    mobileTimelineQuery.addListener(handleTimelineBreakpointChange);
+  }
 
   applyFilter("all");
 }

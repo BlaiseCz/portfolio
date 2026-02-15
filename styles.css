@@ -344,9 +344,6 @@ body {
 .timeline-track {
   display: grid;
   gap: 0.6rem;
-  max-height: 420px;
-  overflow: auto;
-  padding-right: 0.2rem;
 }
 
 .timeline-item {
@@ -417,6 +414,11 @@ body {
   position: sticky;
   top: 1rem;
   transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.timeline-item .timeline-detail {
+  position: static;
+  margin: 0.45rem 0 0 0.5rem;
 }
 
 .timeline-detail.is-updated {
@@ -710,10 +712,6 @@ body {
     position: static;
   }
 
-  .timeline-track {
-    max-height: none;
-    overflow: visible;
-  }
 
   .contact-cards {
     grid-template-columns: 1fr;
