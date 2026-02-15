@@ -12,14 +12,13 @@ const copyStatus = document.getElementById("copy-status");
 const emailLink = document.getElementById("email-link");
 const themeToggle = document.getElementById("theme-toggle");
 const skillMeters = document.querySelectorAll(".skill-meter");
-const timelineButtons = document.querySelectorAll(".timeline-segment-btn[data-period]");
-const timelineBoard = document.getElementById("timeline-board");
+const timelineButtons = document.querySelectorAll(".timeline-item-btn[data-period]");
 const timelineDetailType = document.getElementById("timeline-detail-type");
 const timelineDetailTitle = document.getElementById("timeline-detail-title");
 const timelineDetailPeriod = document.getElementById("timeline-detail-period");
 const timelineDetailDescription = document.getElementById("timeline-detail-description");
 const timelineDetailCard = document.querySelector(".timeline-detail");
-const timelineCursor = document.getElementById("timeline-cursor");
+const timelineFilterButtons = document.querySelectorAll(".timeline-filter-btn[data-filter]");
 
 let projects = [];
 
@@ -227,25 +226,8 @@ if (contactForm && contactSubmit && formStatus) {
 
 if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && timelineDetailPeriod && timelineDetailDescription) {
   const timelineButtonList = [...timelineButtons];
+  const timelineItems = [...document.querySelectorAll(".timeline-item[data-type]")];
   let pinnedButton = timelineButtonList[0];
-
-  const midpointPercent = (button) => {
-    const segment = button.closest(".timeline-segment");
-    if (!segment) {
-      return 22;
-    }
-
-    const style = segment.getAttribute("style") || "";
-    const startMatch = style.match(/--start:\s*([\d.]+)%/);
-    const endMatch = style.match(/--end:\s*([\d.]+)%/);
-    if (!startMatch || !endMatch) {
-      return 22;
-    }
-
-    const start = Number(startMatch[1]);
-    const end = Number(endMatch[1]);
-    return start + (end - start) / 2;
-  };
 
   const setDetail = (button) => {
     timelineButtonList.forEach((item) => item.classList.remove("is-active"));
@@ -256,24 +238,43 @@ if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && t
     timelineDetailPeriod.textContent = button.dataset.period || "";
     timelineDetailDescription.textContent = button.dataset.description || "";
 
-    const markerPosition = `${midpointPercent(button)}%`;
-    if (timelineBoard) {
-      timelineBoard.style.setProperty("--cursor-left", markerPosition);
-    }
-    if (timelineCursor) {
-      timelineCursor.style.left = markerPosition;
-    }
-
     if (timelineDetailCard) {
       timelineDetailCard.classList.remove("is-updated");
       window.requestAnimationFrame(() => timelineDetailCard.classList.add("is-updated"));
     }
   };
 
+  const applyFilter = (filter) => {
+    timelineItems.forEach((item) => {
+      const itemType = item.dataset.type || "";
+      const visible = filter === "all" || itemType === filter;
+      item.classList.toggle("is-hidden", !visible);
+    });
+
+    const firstVisibleButton = timelineItems
+      .find((item) => !item.classList.contains("is-hidden"))
+      ?.querySelector(".timeline-item-btn");
+
+    if (!firstVisibleButton) {
+      return;
+    }
+
+    if (
+      pinnedButton
+      && pinnedButton.closest(".timeline-item")
+      && !pinnedButton.closest(".timeline-item").classList.contains("is-hidden")
+    ) {
+      setDetail(pinnedButton);
+      return;
+    }
+
+    pinnedButton = firstVisibleButton;
+    setDetail(firstVisibleButton);
+  };
+
   setDetail(pinnedButton);
 
-  timelineButtonList.forEach((button, index) => {
-    button.addEventListener("mouseenter", () => setDetail(button));
+  timelineButtonList.forEach((button) => {
     button.addEventListener("focus", () => setDetail(button));
     button.addEventListener("click", () => {
       pinnedButton = button;
@@ -285,22 +286,38 @@ if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && t
         return;
       }
 
+      const visibleButtons = timelineButtonList.filter(
+        (item) => !item.closest(".timeline-item")?.classList.contains("is-hidden"),
+      );
+      const currentIndex = visibleButtons.indexOf(button);
+      if (currentIndex === -1) {
+        return;
+      }
+
       event.preventDefault();
       const nextIndex = event.key === "ArrowRight"
-        ? Math.min(index + 1, timelineButtonList.length - 1)
-        : Math.max(index - 1, 0);
-      const nextButton = timelineButtonList[nextIndex];
+        ? Math.min(currentIndex + 1, visibleButtons.length - 1)
+        : Math.max(currentIndex - 1, 0);
+      const nextButton = visibleButtons[nextIndex];
       pinnedButton = nextButton;
       nextButton.focus();
       setDetail(nextButton);
     });
   });
 
-  if (timelineBoard) {
-    timelineBoard.addEventListener("mouseleave", () => {
-      setDetail(pinnedButton);
+  timelineFilterButtons.forEach((filterButton) => {
+    filterButton.addEventListener("click", () => {
+      const filter = filterButton.dataset.filter || "all";
+      timelineFilterButtons.forEach((button) => {
+        const isActive = button === filterButton;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+      applyFilter(filter);
     });
-  }
+  });
+
+  applyFilter("all");
 }
 
 if (skillMeters.length > 0) {
