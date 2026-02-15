@@ -114,144 +114,73 @@
 
         <section id="experience" class="section">
           <h2>Life's Timeline</h2>
-          <p class="muted timeline-hint">Click each row to expand details. Education and work use subtle accent colors.</p>
-          <div class="timeline" aria-label="Expandable life and career timeline">
-            <details class="timeline-item timeline-life card" open>
-              <summary>
-                <span class="timeline-period">08.10.1998</span>
-                <span class="timeline-title">Birth · Poznań, Poland</span>
-              </summary>
-              <div class="timeline-content">
-                <p>The journey starts here.</p>
-              </div>
-            </details>
+          <p class="muted timeline-hint">Interactive view: hover to preview, click to pin, and use ←/→ keys on a selected item to move across periods.</p>
 
-            <details class="timeline-item timeline-education card">
-              <summary>
-                <span class="timeline-period">10.2017 — 02.2021</span>
-                <span class="timeline-title">BSc in Engineering · Poznan University of Technology</span>
-              </summary>
-              <div class="timeline-content">
-                <ul>
-                  <li>Specialization: Security of IT Systems.</li>
-                </ul>
-              </div>
-            </details>
+          <div id="timeline-board" class="timeline-board card" aria-label="Interactive horizontal timeline of education and work">
+            <div class="timeline-legend" aria-hidden="true">
+              <span><i class="legend-dot legend-edu"></i>Education</span>
+              <span><i class="legend-dot legend-work"></i>Work</span>
+            </div>
 
-            <details class="timeline-item timeline-work card">
-              <summary>
-                <span class="timeline-period">06.2018 — 03.2019</span>
-                <span class="timeline-title">Data Analyst · Optimal Energy</span>
-              </summary>
-              <div class="timeline-content">
-                <ul>
-                  <li>Built automated reporting pipelines and reduced manual extraction work by over 75%.</li>
-                  <li>Developed data validation routines for large-scale energy pricing data.</li>
-                </ul>
-              </div>
-            </details>
+            <div class="timeline-scale" aria-hidden="true">
+              <span>2017</span>
+              <span>2019</span>
+              <span>2021</span>
+              <span>2023</span>
+              <span>2025+</span>
+            </div>
+            <div class="timeline-cursor-row" aria-hidden="true">
+              <span id="timeline-cursor" class="timeline-cursor" style="left: 22%;"></span>
+            </div>
 
-            <details class="timeline-item timeline-work card">
-              <summary>
-                <span class="timeline-period">06.2019 — 03.2022</span>
-                <span class="timeline-title">Junior Full-Stack Developer · PSNC</span>
-              </summary>
-              <div class="timeline-content">
-                <ul>
-                  <li>Maintained and developed municipal platforms, including poznan.pl.</li>
-                  <li>Delivered Java/Spring backend features with FreeMarker and HTML/CSS frontends.</li>
-                </ul>
-              </div>
-            </details>
+            <div class="timeline-lane-group">
+              <div class="timeline-lane-label">Education</div>
+              <div class="timeline-lane timeline-lane-education">
+                <article class="timeline-segment timeline-education" style="--start: 0%; --end: 44%;">
+                  <button class="timeline-segment-btn" type="button" data-type="Education" data-title="BSc in Engineering · PUT" data-period="10.2017 — 02.2021" data-description="Specialization: Security of IT Systems.">BSc · PUT</button>
+                </article>
 
-            <details class="timeline-item timeline-work card">
-              <summary>
-                <span class="timeline-period">01.2021 — 03.2022</span>
-                <span class="timeline-title">AI Researcher · PSNC</span>
-              </summary>
-              <div class="timeline-content">
-                <ul>
-                  <li>Worked on PET-CT oncology diagnostics with medical professionals.</li>
-                  <li>Preprocessed medical imaging datasets and trained early AI models.</li>
-                </ul>
-              </div>
-            </details>
+                <article class="timeline-segment timeline-education" style="--start: 42%; --end: 64%;">
+                  <button class="timeline-segment-btn" type="button" data-type="Education" data-title="MSc in Engineering (AI) · PUT" data-period="03.2021 — 07.2022" data-description="Specialization: Artificial Intelligence.">MSc AI · PUT</button>
+                </article>
 
-            <details class="timeline-item timeline-education card">
-              <summary>
-                <span class="timeline-period">03.2021 — 07.2022</span>
-                <span class="timeline-title">MSc in Engineering (AI) · Poznan University of Technology</span>
-              </summary>
-              <div class="timeline-content">
-                <ul>
-                  <li>Specialization: Artificial Intelligence.</li>
-                </ul>
+                <article class="timeline-segment timeline-education" style="--start: 77%; --end: 91%;">
+                  <button class="timeline-segment-btn" type="button" data-type="Education" data-title="Project Management · CDV" data-period="10.2024 — 07.2025" data-description="Postgraduate studies in project management.">PM · CDV</button>
+                </article>
               </div>
-            </details>
+            </div>
 
-            <details class="timeline-item timeline-work card">
-              <summary>
-                <span class="timeline-period">03.2022 — 08.2022</span>
-                <span class="timeline-title">Full-Stack Developer · PSNC</span>
-              </summary>
-              <div class="timeline-content">
-                <ul>
-                  <li>Built internal portals with Java (Spring) and React for public institutions.</li>
-                  <li>Aligned UI and backend API collaboration across teams.</li>
-                </ul>
-              </div>
-            </details>
+            <div class="timeline-lane-group">
+              <div class="timeline-lane-label">Work</div>
+              <div class="timeline-lane timeline-lane-work">
+                <article class="timeline-segment timeline-work" style="--start: 9%; --end: 24%;">
+                  <button class="timeline-segment-btn" type="button" data-type="Work" data-title="Data Analyst · Optimal Energy" data-period="06.2018 — 03.2019" data-description="Built automated reporting pipelines and data quality checks.">Data Analyst</button>
+                </article>
 
-            <details class="timeline-item timeline-work card">
-              <summary>
-                <span class="timeline-period">09.2022 — 02.2024</span>
-                <span class="timeline-title">Software Engineer · Sii Poland (for CompuGroupMedical)</span>
-              </summary>
-              <div class="timeline-content">
-                <ul>
-                  <li>Modernized Java 8 → 17 and Spring Boot 2.x → 3.x systems.</li>
-                  <li>Built REST APIs and batch services for large public-sector platforms.</li>
-                </ul>
-              </div>
-            </details>
+                <article class="timeline-segment timeline-work" style="--start: 21%; --end: 60%;">
+                  <button class="timeline-segment-btn" type="button" data-type="Work" data-title="Junior/Full-Stack Developer + AI Researcher · PSNC" data-period="06.2019 — 08.2022" data-description="Worked on municipal platforms and AI diagnostics projects.">PSNC Roles</button>
+                </article>
 
-            <details class="timeline-item timeline-education card">
-              <summary>
-                <span class="timeline-period">10.2024 — 07.2025</span>
-                <span class="timeline-title">Project Management · Collegium Da Vinci</span>
-              </summary>
-              <div class="timeline-content">
-                <ul>
-                  <li>Postgraduate specialization in project management.</li>
-                </ul>
-              </div>
-            </details>
+                <article class="timeline-segment timeline-work" style="--start: 58%; --end: 74%;">
+                  <button class="timeline-segment-btn" type="button" data-type="Work" data-title="Software Engineer · Sii for CGM" data-period="09.2022 — 02.2024" data-description="Modernized Java and Spring enterprise platforms.">Sii for CGM</button>
+                </article>
 
-            <details class="timeline-item timeline-work card" open>
-              <summary>
-                <span class="timeline-period">02.2024 — current</span>
-                <span class="timeline-title">Software Engineer · CompuGroupMedical</span>
-              </summary>
-              <div class="timeline-content">
-                <ul>
-                  <li>Designed and shipped production LLM, ASR, and Computer Vision features.</li>
-                  <li>Trained lightweight neural networks for edge/client-side deployment.</li>
-                </ul>
-              </div>
-            </details>
+                <article class="timeline-segment timeline-work" style="--start: 72%; --end: 100%;">
+                  <button class="timeline-segment-btn" type="button" data-type="Work" data-title="Software Engineer · CompuGroupMedical" data-period="02.2024 — current" data-description="Production AI delivery: LLMs, ASR, computer vision, and edge models.">Software Engineer · CGM</button>
+                </article>
 
-            <details class="timeline-item timeline-work card">
-              <summary>
-                <span class="timeline-period">10.2025 — current</span>
-                <span class="timeline-title">Lecturer / Academic Teacher · Collegium Da Vinci</span>
-              </summary>
-              <div class="timeline-content">
-                <ul>
-                  <li>Teaching AI and Data Science through practical, hands-on classes.</li>
-                  <li>Mentoring students in Python, Jupyter, and modern ML tooling.</li>
-                </ul>
+                <article class="timeline-segment timeline-work" style="--start: 89%; --end: 100%;">
+                  <button class="timeline-segment-btn" type="button" data-type="Work" data-title="Lecturer / Academic Teacher · CDV" data-period="10.2025 — current" data-description="Teaching practical AI and Data Science through hands-on classes.">Lecturer · CDV</button>
+                </article>
               </div>
-            </details>
+            </div>
+
+            <article class="timeline-detail card" aria-live="polite">
+              <span id="timeline-detail-type" class="timeline-detail-type">Education</span>
+              <h3 id="timeline-detail-title">BSc in Engineering · PUT</h3>
+              <p id="timeline-detail-period" class="timeline-detail-period">10.2017 — 02.2021</p>
+              <p id="timeline-detail-description" class="timeline-detail-description">Specialization: Security of IT Systems.</p>
+            </article>
           </div>
         </section>
 
