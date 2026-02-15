@@ -131,11 +131,18 @@ body {
 .nav-links a {
   color: var(--text);
   font-weight: 600;
+  padding: 0.45rem 0.25rem;
+  border-radius: 8px;
   text-decoration: none;
 }
 
 .nav-links a:hover {
   color: var(--accent-2);
+}
+
+.nav-links a.is-active {
+  color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 12%, transparent);
 }
 
 .nav-toggle {
@@ -214,6 +221,27 @@ body {
   cursor: pointer;
 }
 
+.btn:hover {
+  transform: translateY(-1px);
+  filter: saturate(1.05);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 3px;
+}
+
+.btn:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .btn-primary {
   background: linear-gradient(120deg, var(--accent), var(--accent-2));
   color: #0b1020;
@@ -246,12 +274,22 @@ body {
 .card {
   border: 1px solid var(--border);
   border-radius: 16px;
+  background: var(--card);
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.04),
     rgba(255, 255, 255, 0.01)
   );
-  padding: 1rem;
+  pointer-events: none;
 }
 
 .timeline-hint {
@@ -519,8 +557,8 @@ body {
 }
 
 .filter-btn.active {
-  background: rgba(127, 140, 255, 0.2);
-  border-color: rgba(127, 140, 255, 0.6);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
 }
 
 .search-label {
@@ -537,6 +575,14 @@ body {
   padding: 0.55rem 0.75rem;
 }
 
+.project-search:focus-visible,
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+  border-color: color-mix(in srgb, var(--accent-2) 55%, var(--border));
+}
+
 .project-grid {
   grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
 }
@@ -550,6 +596,17 @@ body {
   box-shadow: var(--shadow);
   background: var(--card);
   padding: 1.1rem;
+  transition: transform 0.16s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.project-card:focus-within {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 4px;
 }
 
 .tag-row {
@@ -559,9 +616,9 @@ body {
 }
 
 .tag-row span {
-  border: 1px solid rgba(127, 140, 255, 0.32);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
   border-radius: 999px;
-  background: rgba(127, 140, 255, 0.18);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.2px;
@@ -586,6 +643,11 @@ body {
   text-decoration: none;
 }
 
+.project-links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 
 .contact-intro {
   margin-bottom: 1rem;
@@ -599,17 +661,21 @@ body {
 }
 
 .contact-card {
-  border: 1px solid rgba(69, 214, 255, 0.4);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
   border-radius: 14px;
   padding: 0.9rem 1rem;
   display: grid;
   gap: 0.2rem;
   text-decoration: none;
-  background: linear-gradient(180deg, rgba(69, 214, 255, 0.12), rgba(127, 140, 255, 0.08));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 10%, var(--card)),
+    color-mix(in srgb, var(--accent-2) 8%, var(--card))
+  );
 }
 
 .contact-card strong {
-  color: #f8fbff;
+  color: var(--text);
   word-break: break-word;
 }
 
@@ -749,5 +815,16 @@ body {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
   }
 }

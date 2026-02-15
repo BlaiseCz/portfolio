@@ -20,6 +20,27 @@ const timelineDetailDescription = document.getElementById("timeline-detail-descr
 const timelineDetailCard = document.querySelector(".timeline-detail");
 const timelineDetailHost = document.getElementById("timeline-detail-host");
 const timelineFilterButtons = document.querySelectorAll(".timeline-filter-btn[data-filter]");
+const navAnchors = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+const observedSections = navAnchors
+  .map((a) => document.querySelector(a.getAttribute("href")))
+  .filter(Boolean);
+
+if (observedSections.length && navAnchors.length) {
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      const visible = entries.find((e) => e.isIntersecting);
+      if (!visible) return;
+
+      const id = visible.target.id;
+      navAnchors.forEach((a) => {
+        a.classList.toggle("is-active", a.getAttribute("href") === `#${id}`);
+      });
+    },
+    { rootMargin: "-30% 0px -60% 0px", threshold: 0.01 },
+  );
+
+  observedSections.forEach((sec) => navObserver.observe(sec));
+}
 
 let projects = [];
 
@@ -64,17 +85,33 @@ if (year) {
 }
 
 if (navToggle && navLinks) {
+  const closeNav = () => {
+    navLinks.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.textContent = "☰";
+  };
+
   navToggle.addEventListener("click", () => {
     const expanded = navToggle.getAttribute("aria-expanded") === "true";
     navToggle.setAttribute("aria-expanded", String(!expanded));
     navLinks.classList.toggle("open");
+    navToggle.textContent = expanded ? "☰" : "✕";
   });
 
   navLinks.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      navLinks.classList.remove("open");
-      navToggle.setAttribute("aria-expanded", "false");
+      closeNav();
     });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!navLinks.classList.contains("open")) return;
+    if (navLinks.contains(event.target) || navToggle.contains(event.target)) return;
+    closeNav();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeNav();
   });
 }
 
@@ -303,7 +340,7 @@ if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && t
     });
 
     button.addEventListener("keydown", (event) => {
-      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
+      if (event.key !== "ArrowDown" && event.key !== "ArrowUp") {
         return;
       }
 
@@ -316,7 +353,7 @@ if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && t
       }
 
       event.preventDefault();
-      const nextIndex = event.key === "ArrowRight"
+      const nextIndex = event.key === "ArrowDown"
         ? Math.min(currentIndex + 1, visibleButtons.length - 1)
         : Math.max(currentIndex - 1, 0);
       const nextButton = visibleButtons[nextIndex];
