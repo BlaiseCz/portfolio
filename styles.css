@@ -197,7 +197,7 @@ select {
 
 .resume-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: minmax(360px, 400px) 1fr;
   gap: 1.2rem;
   margin-top: calc(var(--header-height) + var(--space-5));
 }
@@ -967,7 +967,7 @@ select:focus-visible {
 
 .hero-top {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: var(--space-2);
   align-items: center;
 }
@@ -975,7 +975,7 @@ select:focus-visible {
 .profile-panel h1 {
   margin: 0 0 var(--space-2);
   font-size: clamp(1.2rem, 1.5vw, 1.5rem);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .quick-facts {
