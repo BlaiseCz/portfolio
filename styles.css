@@ -535,6 +535,16 @@ button:disabled {
   font-size: 0.95rem;
 }
 
+.wip-gif {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  padding: 0.2rem;
+}
+
 .project-controls {
   display: grid;
   gap: 0.8rem;
