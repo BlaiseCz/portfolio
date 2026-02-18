@@ -494,26 +494,53 @@ button:disabled {
 
 .skills-rail {
   display: flex;
-  gap: 0.8rem;
+  gap: 0.9rem;
   overflow-x: auto;
-  padding: 0.25rem 0.2rem 0.55rem;
+  padding: 0.35rem 0.2rem 0.7rem;
   scrollbar-width: thin;
+  justify-content: center;
 }
 
 .skill-node {
-  border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--surface-2) 88%, transparent);
+  --hex-shape: polygon(25% 6%, 75% 6%, 98% 50%, 75% 94%, 25% 94%, 2% 50%);
+  position: relative;
+  border: 0;
+  background: transparent;
   color: var(--text);
-  min-width: 150px;
-  height: 112px;
-  padding: 0.9rem 0.85rem;
-  clip-path: polygon(25% 6%, 75% 6%, 98% 50%, 75% 94%, 25% 94%, 2% 50%);
+  min-width: 172px;
+  height: 122px;
+  padding: 0.9rem 0.9rem;
+  clip-path: var(--hex-shape);
   display: grid;
   place-content: center;
-  gap: 0.1rem;
+  gap: 0.15rem;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-node::before,
+.skill-node::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: var(--hex-shape);
+  pointer-events: none;
+}
+
+.skill-node::before {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 22%, transparent), color-mix(in srgb, var(--accent-2) 20%, transparent));
+  border: 1px solid var(--border);
+}
+
+.skill-node::after {
+  inset: 2px;
+  background: color-mix(in srgb, var(--surface-2) 90%, transparent);
+}
+
+.skill-node > * {
+  position: relative;
+  z-index: 1;
 }
 
 .skill-node strong {
@@ -530,16 +557,18 @@ button:disabled {
 
 .skill-node:hover,
 .skill-node:focus-visible {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--accent-2) 55%, var(--border));
+  transform: translateY(-2px) scale(1.01);
   outline: none;
 }
 
 .skill-node.is-active {
-  border-color: color-mix(in srgb, var(--accent) 60%, var(--accent-2));
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 28%, transparent),
-    0 0 26px color-mix(in srgb, var(--accent-2) 35%, transparent);
-  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 30%, transparent),
+    0 0 32px color-mix(in srgb, var(--accent-2) 45%, transparent);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.skill-node.is-active::before {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 42%, transparent), color-mix(in srgb, var(--accent-2) 40%, transparent));
 }
 
 .skill-panel {
@@ -844,7 +873,7 @@ button:disabled {
   }
 
   .skill-node {
-    min-width: 138px;
+    min-width: 142px;
     height: 106px;
   }
 
