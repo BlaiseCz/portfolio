@@ -8,7 +8,11 @@ const copyEmailButton = document.getElementById("copy-email");
 const copyStatus = document.getElementById("copy-status");
 const emailLink = document.getElementById("email-link");
 const themeToggle = document.getElementById("theme-toggle");
-const skillMeters = document.querySelectorAll(".skill-meter");
+const skillNodes = [...document.querySelectorAll(".skill-node[data-skill]")];
+const skillPanel = document.getElementById("skill-panel");
+const skillPanelTitle = document.getElementById("skill-panel-title");
+const skillPanelDescription = document.getElementById("skill-panel-description");
+const skillPanelPoints = document.getElementById("skill-panel-points");
 const timelineButtons = document.querySelectorAll(".timeline-item-btn[data-period]");
 const timelineDetailType = document.getElementById("timeline-detail-type");
 const timelineDetailTitle = document.getElementById("timeline-detail-title");
@@ -273,22 +277,81 @@ if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && t
   applyFilter("all");
 }
 
-if (skillMeters.length > 0) {
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
 
-        entry.target.classList.add("is-visible");
-        obs.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.35 },
-  );
+const skillContent = {
+  "java-core": {
+    title: "Java Core",
+    description:
+      "I solve backend problems with strong Java/Spring foundations, building stable APIs and production services.",
+    points: [
+      "Enterprise backend design and API architecture.",
+      "Production reliability, maintainability, and clean delivery.",
+    ],
+  },
+  "python-ai": {
+    title: "Python + AI",
+    description:
+      "My current focus is Python-first backend delivery and practical AI model development for real products.",
+    points: [
+      "Model training and adaptation workflows inspired by openWakeWord.",
+      "From-scratch experimentation with custom environments using Gymnasium.",
+    ],
+  },
+  "go-systems": {
+    title: "Go Systems",
+    description:
+      "I am actively building toward efficient, concurrency-aware Go services for high-performance backend systems.",
+    points: [
+      "Service design with scalability and reliability in mind.",
+      "Strong emphasis on simple architecture and operational clarity.",
+    ],
+  },
+  "delivery-toolkit": {
+    title: "Delivery Toolkit",
+    description:
+      "Across all stacks, I rely on a practical delivery toolkit that helps teams ship and maintain production software.",
+    points: [
+      "Docker, Git, Linux, CI/CD workflows, and code quality practices.",
+      "Collaboration, mentoring, and communication with cross-functional teams.",
+    ],
+  },
+};
 
-  skillMeters.forEach((meter) => observer.observe(meter));
+if (skillNodes.length > 0 && skillPanel && skillPanelTitle && skillPanelDescription && skillPanelPoints) {
+  const setActiveSkill = (button) => {
+    const key = button.dataset.skill;
+    const content = skillContent[key];
+    if (!content) return;
+
+    skillNodes.forEach((node) => {
+      const active = node === button;
+      node.classList.toggle("is-active", active);
+      node.setAttribute("aria-selected", String(active));
+    });
+
+    skillPanelTitle.textContent = content.title;
+    skillPanelDescription.textContent = content.description;
+    skillPanelPoints.innerHTML = content.points.map((item) => `<li>${item}</li>`).join("");
+
+    button.scrollIntoView({ inline: "center", behavior: "smooth", block: "nearest" });
+  };
+
+  skillNodes.forEach((button, index) => {
+    button.addEventListener("click", () => setActiveSkill(button));
+    button.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+      event.preventDefault();
+      const next = event.key === "ArrowRight"
+        ? Math.min(index + 1, skillNodes.length - 1)
+        : Math.max(index - 1, 0);
+      const nextButton = skillNodes[next];
+      nextButton.focus();
+      setActiveSkill(nextButton);
+    });
+  });
+
+  const initial = skillNodes.find((node) => node.classList.contains("is-active")) || skillNodes[0];
+  setActiveSkill(initial);
 }
 
 if (copyEmailButton && copyStatus && emailLink) {

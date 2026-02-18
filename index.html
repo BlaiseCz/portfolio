@@ -201,49 +201,39 @@
         </section>
 
         <section class="section" id="skills">
-          <h2>Core Skills</h2>
-          <div class="grid skills-grid">
-            <article class="card skill-card">
-              <h3>Backend Engineering</h3>
-              <p>
-                I design and build backend services in Python, Java, and Go,
-                from API design to production-ready delivery.
+          <h2>Core Skills Journey</h2>
+          <p class="muted">A timeline-style view of how I deliver backend and AI work.</p>
+
+          <div class="skills-carousel" aria-label="Core skills journey">
+            <div class="skills-rail" role="tablist" aria-label="Skill timeline navigation">
+              <button class="skill-node is-active" type="button" role="tab" aria-selected="true" data-skill="java-core" aria-controls="skill-panel">
+                <span class="skill-node-era">Past</span>
+                <strong>Java Core</strong>
+              </button>
+              <button class="skill-node" type="button" role="tab" aria-selected="false" data-skill="python-ai" aria-controls="skill-panel">
+                <span class="skill-node-era">Present</span>
+                <strong>Python + AI</strong>
+              </button>
+              <button class="skill-node" type="button" role="tab" aria-selected="false" data-skill="go-systems" aria-controls="skill-panel">
+                <span class="skill-node-era">Future</span>
+                <strong>Go Systems</strong>
+              </button>
+              <button class="skill-node" type="button" role="tab" aria-selected="false" data-skill="delivery-toolkit" aria-controls="skill-panel">
+                <span class="skill-node-era">Always</span>
+                <strong>Delivery Toolkit</strong>
+              </button>
+            </div>
+
+            <article class="card skill-panel" id="skill-panel" aria-live="polite">
+              <h3 id="skill-panel-title">Java Core</h3>
+              <p id="skill-panel-description">
+                I solve backend problems with strong Java/Spring foundations,
+                building stable APIs and production services.
               </p>
-              <div class="skill-meter" aria-label="Backend engineering proficiency">
-                <span style="--level: 92%"></span>
-              </div>
-            </article>
-            <article class="card skill-card">
-              <h3>AI Model Training</h3>
-              <p>
-                I train and adapt AI models in practical workflows, including
-                wake-word and speech-style projects inspired by
-                <a href="https://github.com/dscripka/openWakeWord" target="_blank" rel="noreferrer">openWakeWord</a>.
-              </p>
-              <div class="skill-meter" aria-label="AI model training proficiency">
-                <span style="--level: 86%"></span>
-              </div>
-            </article>
-            <article class="card skill-card">
-              <h3>From-Scratch AI Development</h3>
-              <p>
-                I can also create and train custom models from scratch,
-                including reinforcement-learning style environments using
-                <a href="https://gymnasium.farama.org/index.html" target="_blank" rel="noreferrer">Gymnasium</a>.
-              </p>
-              <div class="skill-meter" aria-label="Custom AI development proficiency">
-                <span style="--level: 58%"></span>
-              </div>
-            </article>
-            <article class="card skill-card">
-              <h3>Professional Toolkit</h3>
-              <p>
-                Docker, Git, Maven, Jenkins, Linux, collaboration, mentoring,
-                and cross-functional product communication.
-              </p>
-              <div class="skill-meter" aria-label="Delivery toolkit proficiency">
-                <span style="--level: 84%"></span>
-              </div>
+              <ul id="skill-panel-points" class="skill-panel-points">
+                <li>Enterprise backend design and API architecture.</li>
+                <li>Production reliability, maintainability, and clean delivery.</li>
+              </ul>
             </article>
           </div>
         </section>

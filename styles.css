@@ -267,9 +267,6 @@ button:disabled {
   gap: 1rem;
 }
 
-.skills-grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
 
 .card {
   border: 1px solid var(--border);
@@ -490,36 +487,79 @@ button:disabled {
   margin-bottom: 0;
 }
 
-.skill-card {
-  background: var(--card);
-  border-color: var(--border);
-  color: var(--text);
+.skills-carousel {
+  display: grid;
+  gap: 1rem;
 }
 
-.skill-card p {
+.skills-rail {
+  display: flex;
+  gap: 0.8rem;
+  overflow-x: auto;
+  padding: 0.25rem 0.2rem 0.55rem;
+  scrollbar-width: thin;
+}
+
+.skill-node {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-2) 88%, transparent);
+  color: var(--text);
+  min-width: 150px;
+  height: 112px;
+  padding: 0.9rem 0.85rem;
+  clip-path: polygon(25% 6%, 75% 6%, 98% 50%, 75% 94%, 25% 94%, 2% 50%);
+  display: grid;
+  place-content: center;
+  gap: 0.1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-node strong {
+  font-size: 0.95rem;
+}
+
+.skill-node-era {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.45px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.skill-node:hover,
+.skill-node:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent-2) 55%, var(--border));
+  outline: none;
+}
+
+.skill-node.is-active {
+  border-color: color-mix(in srgb, var(--accent) 60%, var(--accent-2));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 28%, transparent),
+    0 0 26px color-mix(in srgb, var(--accent-2) 35%, transparent);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.skill-panel {
+  border-color: color-mix(in srgb, var(--border) 80%, #ffffff22);
+  background: color-mix(in srgb, var(--surface-2) 90%, transparent);
+}
+
+.skill-panel h3 {
+  margin: 0.1rem 0 0.35rem;
+}
+
+.skill-panel p {
+  margin: 0;
   color: var(--muted);
 }
 
-.skill-meter {
-  position: relative;
-  height: 8px;
-  background: color-mix(in srgb, var(--work-color) 18%, transparent);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-top: 0.8rem;
-}
-
-.skill-meter span {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--work-color), var(--edu-color));
-  transition: width 1.1s ease;
-}
-
-.skill-meter.is-visible span {
-  width: var(--level);
+.skill-panel-points {
+  margin: 0.8rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
 }
 
 .section-title-row {
@@ -803,6 +843,10 @@ button:disabled {
     position: static;
   }
 
+  .skill-node {
+    min-width: 138px;
+    height: 106px;
+  }
 
   .contact-cards {
     grid-template-columns: 1fr;
