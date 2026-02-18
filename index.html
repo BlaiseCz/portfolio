@@ -201,75 +201,65 @@
         </section>
 
         <section class="section" id="skills">
-          <h2>Core Skills</h2>
-          <div class="grid skills-grid">
-            <article class="card skill-card">
-              <h3>Present: Python & AI Delivery</h3>
-              <p>
-                Python 3, FastAPI/Flask, PyTorch, scikit-learn, LangChain,
-                Langfuse, Promptfoo, ONNX Runtime.
+          <h2>Core Skills Journey</h2>
+          <p class="muted">A timeline-style view of how I deliver backend and AI work.</p>
+
+          <div class="skills-carousel" aria-label="Core skills journey">
+            <div class="skills-rail" role="tablist" aria-label="Skill timeline navigation">
+              <button class="skill-node" type="button" role="tab" aria-selected="false" data-skill="java-core" aria-controls="skill-panel">
+                <span class="skill-node-era">Past</span>
+                <strong>Java Core</strong>
+              </button>
+              <button class="skill-node is-active" type="button" role="tab" aria-selected="true" data-skill="python-ai" aria-controls="skill-panel">
+                <span class="skill-node-era">Present</span>
+                <strong>Python + AI</strong>
+              </button>
+              <button class="skill-node" type="button" role="tab" aria-selected="false" data-skill="go-systems" aria-controls="skill-panel">
+                <span class="skill-node-era">Future</span>
+                <strong>Go Systems</strong>
+              </button>
+              <button class="skill-node" type="button" role="tab" aria-selected="false" data-skill="delivery-toolkit" aria-controls="skill-panel">
+                <span class="skill-node-era">Always</span>
+                <strong>Delivery Toolkit</strong>
+              </button>
+            </div>
+
+            <article class="card skill-panel" id="skill-panel" aria-live="polite">
+              <h3 id="skill-panel-title">Python + AI</h3>
+              <p id="skill-panel-description">
+                My current focus is Python-first backend delivery and practical AI
+                model development for real products.
               </p>
-              <div class="skill-meter" aria-label="Python and AI delivery proficiency">
-                <span style="--level: 92%"></span>
-              </div>
-            </article>
-            <article class="card skill-card">
-              <h3>Past: Java Foundations</h3>
-              <p>
-                Java 8/17, Spring Framework, Spring Boot 2/3, REST APIs,
-                enterprise modernization and stable backend delivery.
-              </p>
-              <div class="skill-meter" aria-label="Java backend proficiency">
-                <span style="--level: 86%"></span>
-              </div>
-            </article>
-            <article class="card skill-card">
-              <h3>Future: Go Path</h3>
-              <p>
-                Building toward clean, efficient, concurrency-aware Go services
-                and platform tooling.
-              </p>
-              <div class="skill-meter" aria-label="Go learning progress">
-                <span style="--level: 58%"></span>
-              </div>
-            </article>
-            <article class="card skill-card">
-              <h3>Professional Toolkit</h3>
-              <p>
-                Docker, Git, Maven, Jenkins, Linux, collaboration, mentoring,
-                and cross-functional product communication.
-              </p>
-              <div class="skill-meter" aria-label="Delivery toolkit proficiency">
-                <span style="--level: 84%"></span>
-              </div>
+              <ul id="skill-panel-points" class="skill-panel-points">
+                <li>Model training and adaptation workflows inspired by openWakeWord.</li>
+                <li>From-scratch experimentation with custom environments using Gymnasium.</li>
+              </ul>
             </article>
           </div>
         </section>
 
         <section class="section" id="projects">
           <div class="section-title-row">
-            <h2>Selected Projects</h2>
-            <p class="muted">Filter by skill tags and search by keyword.</p>
-          </div>
-
-          <div class="project-controls" aria-label="Project filters">
-            <div class="filter-tags" id="tag-filters"></div>
-            <label class="search-label" for="project-search"
-              >Search projects</label
-            >
-            <input
-              id="project-search"
-              class="project-search"
-              type="search"
-              placeholder="Search by title, tag, or highlight"
+            <h2>Now Building</h2>
+            <p class="muted">What I’m actively working on right now.</p>
+            <img
+              class="wip-gif"
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+              alt="Work in progress animation"
+              loading="lazy"
             />
           </div>
 
-          <div
-            class="grid project-grid"
-            id="project-grid"
-            aria-live="polite"
-          ></div>
+          <div class="card now-building-card" aria-live="polite">
+            <p class="muted">
+              I currently have two projects in progress. I’ll publish full case studies,
+              links, and technical breakdowns once they are production-ready.
+            </p>
+            <ul class="now-building-list">
+              <li>Backend + AI product currently in implementation phase.</li>
+              <li>Model training and experimentation project in active R&D.</li>
+            </ul>
+          </div>
         </section>
 
         <section class="section" id="contact">

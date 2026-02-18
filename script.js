@@ -1,9 +1,6 @@
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 const year = document.getElementById("year");
-const projectGrid = document.getElementById("project-grid");
-const tagFilters = document.getElementById("tag-filters");
-const projectSearch = document.getElementById("project-search");
 const contactForm = document.getElementById("contact-form");
 const contactSubmit = document.getElementById("contact-submit");
 const formStatus = document.getElementById("form-status");
@@ -11,7 +8,11 @@ const copyEmailButton = document.getElementById("copy-email");
 const copyStatus = document.getElementById("copy-status");
 const emailLink = document.getElementById("email-link");
 const themeToggle = document.getElementById("theme-toggle");
-const skillMeters = document.querySelectorAll(".skill-meter");
+const skillNodes = [...document.querySelectorAll(".skill-node[data-skill]")];
+const skillPanel = document.getElementById("skill-panel");
+const skillPanelTitle = document.getElementById("skill-panel-title");
+const skillPanelDescription = document.getElementById("skill-panel-description");
+const skillPanelPoints = document.getElementById("skill-panel-points");
 const timelineButtons = document.querySelectorAll(".timeline-item-btn[data-period]");
 const timelineDetailType = document.getElementById("timeline-detail-type");
 const timelineDetailTitle = document.getElementById("timeline-detail-title");
@@ -42,7 +43,6 @@ if (observedSections.length && navAnchors.length) {
   observedSections.forEach((sec) => navObserver.observe(sec));
 }
 
-let projects = [];
 
 function getPreferredTheme() {
   const saved = localStorage.getItem("theme");
@@ -77,8 +77,6 @@ if (themeToggle) {
   });
 }
 
-let activeTag = "All";
-let searchTerm = "";
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -112,119 +110,6 @@ if (navToggle && navLinks) {
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeNav();
-  });
-}
-
-function createProjectCard(project) {
-  const card = document.createElement("article");
-  card.className = "project-card";
-
-  const tagsHtml = project.tags.map((tag) => `<span>${tag}</span>`).join("");
-  const highlightsHtml = project.highlights
-    .map((item) => `<li>${item}</li>`)
-    .join("");
-
-  const links = [];
-  if (project.links?.repo) {
-    links.push(
-      `<a href="${project.links.repo}" target="_blank" rel="noreferrer">Repository ↗</a>`,
-    );
-  }
-  if (project.links?.demo) {
-    links.push(
-      `<a href="${project.links.demo}" target="_blank" rel="noreferrer">Live page ↗</a>`,
-    );
-  }
-
-  card.innerHTML = `
-    <div class="tag-row">${tagsHtml}</div>
-    <h3>${project.title}</h3>
-    <ul class="project-highlights">${highlightsHtml}</ul>
-    <div class="project-links">${links.join("")}</div>
-  `;
-
-  return card;
-}
-
-function projectMatches(project) {
-  const tagMatch = activeTag === "All" || project.tags.includes(activeTag);
-  if (!tagMatch) {
-    return false;
-  }
-
-  if (!searchTerm) {
-    return true;
-  }
-
-  const haystack = [project.title, ...project.tags, ...project.highlights]
-    .join(" ")
-    .toLowerCase();
-  return haystack.includes(searchTerm);
-}
-
-function renderProjects() {
-  if (!projectGrid) {
-    return;
-  }
-
-  const filtered = projects.filter(projectMatches);
-  projectGrid.innerHTML = "";
-
-  if (filtered.length === 0) {
-    projectGrid.innerHTML =
-      '<p class="muted">No projects matched your filter. Try another tag or search term.</p>';
-    return;
-  }
-
-  filtered.forEach((project) => {
-    projectGrid.appendChild(createProjectCard(project));
-  });
-}
-
-function renderFilters() {
-  if (!tagFilters) {
-    return;
-  }
-
-  const tags = new Set(["All"]);
-  projects.forEach((project) => project.tags.forEach((tag) => tags.add(tag)));
-
-  tagFilters.innerHTML = "";
-  tags.forEach((tag) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `filter-btn${tag === activeTag ? " active" : ""}`;
-    button.textContent = tag;
-    button.setAttribute("aria-pressed", String(tag === activeTag));
-
-    button.addEventListener("click", () => {
-      activeTag = tag;
-      renderFilters();
-      renderProjects();
-    });
-
-    tagFilters.appendChild(button);
-  });
-}
-
-async function loadProjects() {
-  if (!projectGrid) {
-    return;
-  }
-
-  projectGrid.innerHTML = '<p class="muted">Loading projects...</p>';
-
-  const response = await fetch("data/projects.json");
-  projects = await response.json();
-
-  renderFilters();
-  renderProjects();
-}
-
-if (projectSearch) {
-  projectSearch.addEventListener("input", (event) => {
-    searchTerm = event.target.value.trim().toLowerCase();
-    renderProjects();
   });
 }
 
@@ -392,22 +277,81 @@ if (timelineButtons.length > 0 && timelineDetailType && timelineDetailTitle && t
   applyFilter("all");
 }
 
-if (skillMeters.length > 0) {
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
 
-        entry.target.classList.add("is-visible");
-        obs.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.35 },
-  );
+const skillContent = {
+  "java-core": {
+    title: "Java Core",
+    description:
+      "I solve backend problems with strong Java/Spring foundations, building stable APIs and production services.",
+    points: [
+      "Enterprise backend design and API architecture.",
+      "Production reliability, maintainability, and clean delivery.",
+    ],
+  },
+  "python-ai": {
+    title: "Python + AI",
+    description:
+      "My current focus is Python-first backend delivery and practical AI model development for real products.",
+    points: [
+      "Model training and adaptation workflows inspired by openWakeWord.",
+      "From-scratch experimentation with custom environments using Gymnasium.",
+    ],
+  },
+  "go-systems": {
+    title: "Go Systems",
+    description:
+      "I am actively building toward efficient, concurrency-aware Go services for high-performance backend systems.",
+    points: [
+      "Service design with scalability and reliability in mind.",
+      "Strong emphasis on simple architecture and operational clarity.",
+    ],
+  },
+  "delivery-toolkit": {
+    title: "Delivery Toolkit",
+    description:
+      "Across all stacks, I rely on a practical delivery toolkit that helps teams ship and maintain production software.",
+    points: [
+      "Docker, Git, Linux, CI/CD workflows, and code quality practices.",
+      "Collaboration, mentoring, and communication with cross-functional teams.",
+    ],
+  },
+};
 
-  skillMeters.forEach((meter) => observer.observe(meter));
+if (skillNodes.length > 0 && skillPanel && skillPanelTitle && skillPanelDescription && skillPanelPoints) {
+  const setActiveSkill = (button) => {
+    const key = button.dataset.skill;
+    const content = skillContent[key];
+    if (!content) return;
+
+    skillNodes.forEach((node) => {
+      const active = node === button;
+      node.classList.toggle("is-active", active);
+      node.setAttribute("aria-selected", String(active));
+    });
+
+    skillPanelTitle.textContent = content.title;
+    skillPanelDescription.textContent = content.description;
+    skillPanelPoints.innerHTML = content.points.map((item) => `<li>${item}</li>`).join("");
+
+    button.scrollIntoView({ inline: "center", behavior: "smooth", block: "nearest" });
+  };
+
+  skillNodes.forEach((button, index) => {
+    button.addEventListener("click", () => setActiveSkill(button));
+    button.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+      event.preventDefault();
+      const next = event.key === "ArrowRight"
+        ? Math.min(index + 1, skillNodes.length - 1)
+        : Math.max(index - 1, 0);
+      const nextButton = skillNodes[next];
+      nextButton.focus();
+      setActiveSkill(nextButton);
+    });
+  });
+
+  const initial = skillNodes.find((node) => node.classList.contains("is-active")) || skillNodes[0];
+  setActiveSkill(initial);
 }
 
 if (copyEmailButton && copyStatus && emailLink) {
@@ -425,4 +369,3 @@ if (copyEmailButton && copyStatus && emailLink) {
   });
 }
 
-loadProjects();
