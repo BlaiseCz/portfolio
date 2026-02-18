@@ -545,6 +545,21 @@ button:disabled {
   padding: 0.2rem;
 }
 
+
+.now-building-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.1rem;
+}
+
+.now-building-list {
+  margin: 0.65rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+}
+
 .project-controls {
   display: grid;
   gap: 0.8rem;

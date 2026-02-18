@@ -250,8 +250,8 @@
 
         <section class="section" id="projects">
           <div class="section-title-row">
-            <h2>Selected Projects</h2>
-            <p class="muted">In progress — two projects are currently under construction.</p>
+            <h2>Now Building</h2>
+            <p class="muted">What I’m actively working on right now.</p>
             <img
               class="wip-gif"
               src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
@@ -260,24 +260,16 @@
             />
           </div>
 
-          <div class="project-controls" aria-label="Project filters">
-            <div class="filter-tags" id="tag-filters"></div>
-            <label class="search-label" for="project-search"
-              >Search projects</label
-            >
-            <input
-              id="project-search"
-              class="project-search"
-              type="search"
-              placeholder="Search by title, tag, or highlight"
-            />
+          <div class="card now-building-card" aria-live="polite">
+            <p class="muted">
+              I currently have two projects in progress. I’ll publish full case studies,
+              links, and technical breakdowns once they are production-ready.
+            </p>
+            <ul class="now-building-list">
+              <li>Backend + AI product currently in implementation phase.</li>
+              <li>Model training and experimentation project in active R&D.</li>
+            </ul>
           </div>
-
-          <div
-            class="grid project-grid"
-            id="project-grid"
-            aria-live="polite"
-          ></div>
         </section>
 
         <section class="section" id="contact">

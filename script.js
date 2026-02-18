@@ -1,9 +1,6 @@
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 const year = document.getElementById("year");
-const projectGrid = document.getElementById("project-grid");
-const tagFilters = document.getElementById("tag-filters");
-const projectSearch = document.getElementById("project-search");
 const contactForm = document.getElementById("contact-form");
 const contactSubmit = document.getElementById("contact-submit");
 const formStatus = document.getElementById("form-status");
@@ -42,7 +39,6 @@ if (observedSections.length && navAnchors.length) {
   observedSections.forEach((sec) => navObserver.observe(sec));
 }
 
-let projects = [];
 
 function getPreferredTheme() {
   const saved = localStorage.getItem("theme");
@@ -77,8 +73,6 @@ if (themeToggle) {
   });
 }
 
-let activeTag = "All";
-let searchTerm = "";
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -112,119 +106,6 @@ if (navToggle && navLinks) {
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeNav();
-  });
-}
-
-function createProjectCard(project) {
-  const card = document.createElement("article");
-  card.className = "project-card";
-
-  const tagsHtml = project.tags.map((tag) => `<span>${tag}</span>`).join("");
-  const highlightsHtml = project.highlights
-    .map((item) => `<li>${item}</li>`)
-    .join("");
-
-  const links = [];
-  if (project.links?.repo) {
-    links.push(
-      `<a href="${project.links.repo}" target="_blank" rel="noreferrer">Repository ↗</a>`,
-    );
-  }
-  if (project.links?.demo) {
-    links.push(
-      `<a href="${project.links.demo}" target="_blank" rel="noreferrer">Live page ↗</a>`,
-    );
-  }
-
-  card.innerHTML = `
-    <div class="tag-row">${tagsHtml}</div>
-    <h3>${project.title}</h3>
-    <ul class="project-highlights">${highlightsHtml}</ul>
-    <div class="project-links">${links.join("")}</div>
-  `;
-
-  return card;
-}
-
-function projectMatches(project) {
-  const tagMatch = activeTag === "All" || project.tags.includes(activeTag);
-  if (!tagMatch) {
-    return false;
-  }
-
-  if (!searchTerm) {
-    return true;
-  }
-
-  const haystack = [project.title, ...project.tags, ...project.highlights]
-    .join(" ")
-    .toLowerCase();
-  return haystack.includes(searchTerm);
-}
-
-function renderProjects() {
-  if (!projectGrid) {
-    return;
-  }
-
-  const filtered = projects.filter(projectMatches);
-  projectGrid.innerHTML = "";
-
-  if (filtered.length === 0) {
-    projectGrid.innerHTML =
-      '<p class="muted">No projects matched your filter. Try another tag or search term.</p>';
-    return;
-  }
-
-  filtered.forEach((project) => {
-    projectGrid.appendChild(createProjectCard(project));
-  });
-}
-
-function renderFilters() {
-  if (!tagFilters) {
-    return;
-  }
-
-  const tags = new Set(["All"]);
-  projects.forEach((project) => project.tags.forEach((tag) => tags.add(tag)));
-
-  tagFilters.innerHTML = "";
-  tags.forEach((tag) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `filter-btn${tag === activeTag ? " active" : ""}`;
-    button.textContent = tag;
-    button.setAttribute("aria-pressed", String(tag === activeTag));
-
-    button.addEventListener("click", () => {
-      activeTag = tag;
-      renderFilters();
-      renderProjects();
-    });
-
-    tagFilters.appendChild(button);
-  });
-}
-
-async function loadProjects() {
-  if (!projectGrid) {
-    return;
-  }
-
-  projectGrid.innerHTML = '<p class="muted">Loading projects...</p>';
-
-  const response = await fetch("data/projects.json");
-  projects = await response.json();
-
-  renderFilters();
-  renderProjects();
-}
-
-if (projectSearch) {
-  projectSearch.addEventListener("input", (event) => {
-    searchTerm = event.target.value.trim().toLowerCase();
-    renderProjects();
   });
 }
 
@@ -425,4 +306,3 @@ if (copyEmailButton && copyStatus && emailLink) {
   });
 }
 
-loadProjects();
