@@ -53,6 +53,7 @@
         <a class="brand" href="#top">Błażej<span>GithubPage</span></a>
         <button
           class="nav-toggle"
+          type="button"
           aria-label="Open navigation"
           aria-expanded="false"
           aria-controls="primary-nav-links"
@@ -74,23 +75,28 @@
 
     <main id="main-content" class="container resume-layout">
       <aside class="profile-panel card" aria-label="Profile">
-        <img
-          class="profile-photo"
-          src="https://blaisecz.github.io/portfolio/profile-photo.svg"
-          alt="Profile photo of Błażej Czekała"
-        />
-        <h1>Błażej Czekała, MSc</h1>
-        <p class="role">Java was my past · Python is my present · Go is my future</p>
+        <div class="hero-top">
+          <img
+            class="profile-photo"
+            src="https://blaisecz.github.io/portfolio/profile-photo.svg"
+            alt="Profile photo of Błażej Czekała"
+          />
+          <div>
+            <h1>Błażej Czekała, MSc</h1>
+            <p class="role">Java was my past · Python is my present · Go is my future</p>
+          </div>
+        </div>
+
         <p class="muted">
           Software Engineer specializing in scalable AI systems (LLMs, ASR,
           Computer Vision), production-grade Python services, and modern backend
           delivery in healthcare products.
         </p>
 
-        <ul class="quick-facts">
-          <li><strong>Email:</strong> blazej.czekala@gmail.com</li>
-          <li><strong>Current role:</strong> Software Engineer @ CompuGroupMedical</li>
-          <li><strong>Also:</strong> Lecturer in AI & Data Science @ CDV</li>
+        <ul class="quick-facts" role="list">
+          <li><span class="fact-label">Email</span><strong>blazej.czekala@gmail.com</strong></li>
+          <li><span class="fact-label">Current role</span><strong>Software Engineer @ CompuGroupMedical</strong></li>
+          <li><span class="fact-label">Also</span><strong>Lecturer in AI & Data Science @ CDV</strong></li>
         </ul>
 
         <div class="hero-actions">
@@ -130,71 +136,97 @@
             </div>
 
             <div class="timeline-layout">
-              <div class="timeline-track" id="timeline-track" role="listbox" aria-label="Timeline milestones">
-                <article class="timeline-item timeline-work" data-type="work" role="option">
-                  <button class="timeline-item-btn" type="button" data-type="Work" data-title="Lecturer / Academic Teacher · CDV" data-period="10.2025 — current" data-description="Teaching practical AI and Data Science through hands-on classes.">
+              <div class="timeline-track" id="timeline-track" role="list" aria-label="Timeline milestones">
+                <article class="timeline-item timeline-work" data-type="work" role="listitem">
+                  <button class="timeline-item-btn" type="button" data-type="Work" data-title="Lecturer / Academic Teacher · CDV" data-period="10.2025 — current" data-description="Teaching practical AI and Data Science with hands-on labs.">
                     <span class="timeline-item-period">10.2025 — current</span>
                     <strong>Lecturer · CDV</strong>
                   </button>
+                  <article class="timeline-detail card" hidden>
+                    <span class="timeline-detail-type">Work</span>
+                    <h3>Lecturer / Academic Teacher · CDV</h3>
+                    <p class="timeline-detail-period">10.2025 — current</p>
+                    <p class="timeline-detail-description">Teaching practical AI and Data Science with hands-on labs.</p>
+                  </article>
                 </article>
 
-                <article class="timeline-item timeline-education" data-type="education" role="option">
-                  <button class="timeline-item-btn" type="button" data-type="Education" data-title="Project Management · CDV" data-period="10.2024 — 07.2025" data-description="Postgraduate studies in project management.">
-                    <span class="timeline-item-period">10.2024 — 07.2025</span>
-                    <strong>PM · CDV</strong>
-                  </button>
-                </article>
-
-                <article class="timeline-item timeline-work" data-type="work" role="option">
+                <article class="timeline-item timeline-work" data-type="work" role="listitem">
                   <button class="timeline-item-btn" type="button" data-type="Work" data-title="Software Engineer · CompuGroupMedical" data-period="02.2024 — current" data-description="Production AI delivery: LLMs, ASR, computer vision, and edge models.">
                     <span class="timeline-item-period">02.2024 — current</span>
-                    <strong>Software Engineer · CGM</strong>
+                    <strong>CompuGroupMedical</strong>
                   </button>
+                  <article class="timeline-detail card" hidden>
+                    <span class="timeline-detail-type">Work</span>
+                    <h3>Software Engineer · CompuGroupMedical</h3>
+                    <p class="timeline-detail-period">02.2024 — current</p>
+                    <p class="timeline-detail-description">Production AI delivery: LLMs, ASR, computer vision, and edge models.</p>
+                  </article>
                 </article>
 
-                <article class="timeline-item timeline-education" data-type="education" role="option">
-                  <button class="timeline-item-btn" type="button" data-type="Education" data-title="MSc in Artificial Intelligence · WSB Merito" data-period="10.2023 — 02.2025" data-description="Advanced practical AI studies with focus on real-world implementation.">
+                <article class="timeline-item timeline-education" data-type="education" role="listitem">
+                  <button class="timeline-item-btn" type="button" data-type="Education" data-title="MSc in AI · WSB Merito" data-period="10.2023 — 02.2025" data-description="Advanced machine learning, model evaluation, and AI systems engineering.">
                     <span class="timeline-item-period">10.2023 — 02.2025</span>
                     <strong>MSc in AI · WSB Merito</strong>
                   </button>
+                  <article class="timeline-detail card" hidden>
+                    <span class="timeline-detail-type">Education</span>
+                    <h3>MSc in AI · WSB Merito</h3>
+                    <p class="timeline-detail-period">10.2023 — 02.2025</p>
+                    <p class="timeline-detail-description">Advanced machine learning, model evaluation, and AI systems engineering.</p>
+                  </article>
                 </article>
 
-                <article class="timeline-item timeline-work" data-type="work" role="option">
+                <article class="timeline-item timeline-work" data-type="work" role="listitem">
                   <button class="timeline-item-btn" type="button" data-type="Work" data-title="Software Engineer · Sii for CGM" data-period="09.2022 — 02.2024" data-description="Modernized Java and Spring enterprise platforms.">
                     <span class="timeline-item-period">09.2022 — 02.2024</span>
                     <strong>Sii for CGM</strong>
                   </button>
+                  <article class="timeline-detail card" hidden>
+                    <span class="timeline-detail-type">Work</span>
+                    <h3>Software Engineer · Sii for CGM</h3>
+                    <p class="timeline-detail-period">09.2022 — 02.2024</p>
+                    <p class="timeline-detail-description">Modernized Java and Spring enterprise platforms.</p>
+                  </article>
                 </article>
 
-                <article class="timeline-item timeline-work" data-type="work" role="option">
+                <article class="timeline-item timeline-work" data-type="work" role="listitem">
                   <button class="timeline-item-btn" type="button" data-type="Work" data-title="Junior/Full-Stack Developer + AI Researcher · PSNC" data-period="06.2019 — 08.2022" data-description="Worked on municipal platforms and AI diagnostics projects.">
                     <span class="timeline-item-period">06.2019 — 08.2022</span>
                     <strong>PSNC Roles</strong>
                   </button>
+                  <article class="timeline-detail card" hidden>
+                    <span class="timeline-detail-type">Work</span>
+                    <h3>Junior/Full-Stack Developer + AI Researcher · PSNC</h3>
+                    <p class="timeline-detail-period">06.2019 — 08.2022</p>
+                    <p class="timeline-detail-description">Worked on municipal platforms and AI diagnostics projects.</p>
+                  </article>
                 </article>
 
-                <article class="timeline-item timeline-work" data-type="work" role="option">
+                <article class="timeline-item timeline-work" data-type="work" role="listitem">
                   <button class="timeline-item-btn" type="button" data-type="Work" data-title="Data Analyst · Optimal Energy" data-period="06.2018 — 03.2019" data-description="Built automated reporting pipelines and data quality checks.">
                     <span class="timeline-item-period">06.2018 — 03.2019</span>
                     <strong>Data Analyst</strong>
                   </button>
+                  <article class="timeline-detail card" hidden>
+                    <span class="timeline-detail-type">Work</span>
+                    <h3>Data Analyst · Optimal Energy</h3>
+                    <p class="timeline-detail-period">06.2018 — 03.2019</p>
+                    <p class="timeline-detail-description">Built automated reporting pipelines and data quality checks.</p>
+                  </article>
                 </article>
 
-                <article class="timeline-item timeline-education" data-type="education" role="option">
+                <article class="timeline-item timeline-education" data-type="education" role="listitem">
                   <button class="timeline-item-btn" type="button" data-type="Education" data-title="BSc in Engineering · PUT" data-period="10.2017 — 02.2021" data-description="Specialization: Security of IT Systems.">
                     <span class="timeline-item-period">10.2017 — 02.2021</span>
                     <strong>BSc · PUT</strong>
                   </button>
+                  <article class="timeline-detail card" hidden>
+                    <span class="timeline-detail-type">Education</span>
+                    <h3>BSc in Engineering · PUT</h3>
+                    <p class="timeline-detail-period">10.2017 — 02.2021</p>
+                    <p class="timeline-detail-description">Specialization: Security of IT Systems.</p>
+                  </article>
                 </article>
-              </div>
-
-              <div id="timeline-detail-host">
-                <article class="timeline-detail card" aria-live="polite">
-                <span id="timeline-detail-type" class="timeline-detail-type">Work</span>
-                <h3 id="timeline-detail-title">Software Engineer · CompuGroupMedical</h3>
-                <p id="timeline-detail-period" class="timeline-detail-period">02.2024 — current</p>
-                <p id="timeline-detail-description" class="timeline-detail-description">Production AI delivery: LLMs, ASR, computer vision, and edge models.</p>
-              </article>
               </div>
             </div>
           </div>
@@ -242,12 +274,6 @@
           <div class="section-title-row">
             <h2>Now Building</h2>
             <p class="muted">What I’m actively working on right now.</p>
-            <img
-              class="wip-gif"
-              src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
-              alt="Work in progress animation"
-              loading="lazy"
-            />
           </div>
 
           <div class="card now-building-card" aria-live="polite">
@@ -260,6 +286,21 @@
               <li>Model training and experimentation project in active R&D.</li>
             </ul>
           </div>
+
+          <div class="project-controls" aria-label="Project filters">
+            <label class="search-label" for="project-search">Search projects</label>
+            <div class="search-wrap">
+              <input id="project-search" class="project-search" type="search" placeholder="Search by title or tags" />
+              <button id="clear-search" class="clear-search" type="button" aria-label="Clear search">×</button>
+            </div>
+            <div id="project-tags" class="filter-tags" role="group" aria-label="Filter by tag"></div>
+          </div>
+
+          <div id="project-grid" class="grid project-grid" aria-live="polite"></div>
+          <div id="project-empty" class="card project-empty" hidden>
+            <p class="muted">No projects match this search and filter combination.</p>
+            <button id="clear-project-filters" type="button" class="btn btn-secondary">Clear filters</button>
+          </div>
         </section>
 
         <section class="section" id="contact">
@@ -269,13 +310,13 @@
           </p>
 
           <div class="contact-cards">
-            <a class="contact-card" id="email-link" href="mailto:blazej.czekala@gmail.com">
+            <a class="contact-card contact-card-primary" id="email-link" href="mailto:blazej.czekala@gmail.com">
               <span class="contact-label">Email</span>
               <strong>blazej.czekala@gmail.com</strong>
             </a>
 
             <a
-              class="contact-card"
+              class="contact-card contact-card-primary"
               href="https://www.linkedin.com/in/blazej-czekala/"
               target="_blank"
               rel="noreferrer"
@@ -302,6 +343,7 @@
             action="https://formspree.io/f/xeokyqgd"
             method="POST"
           >
+            <p class="muted form-note">Form sends via Formspree. If it fails, please use Email or LinkedIn above.</p>
             <label for="name">Name</label>
             <input id="name" name="name" type="text" required />
 
